@@ -2,12 +2,14 @@ package system.library.libro.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +34,9 @@ public class Book {
 
     @ManyToMany(mappedBy = "booksAuthored")
     private Set<User> authors ;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private Set<Copy> copies;
 
     @Override
     public String toString() {

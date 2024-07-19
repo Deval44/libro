@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import system.library.libro.entity.Book;
 import system.library.libro.entity.User;
 import system.library.libro.service.BookService;
-import system.library.libro.service.UserService;
 
 import java.util.List;
 import java.util.Set;
@@ -23,9 +22,6 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
-
-    @Autowired
-    private UserService userService;
 
     @GetMapping("/book/{bookId}")
     public Book getBook(@PathVariable Long bookId){
