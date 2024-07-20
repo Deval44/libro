@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import system.library.libro.entity.Copy;
 import system.library.libro.entity.Rack;
 import system.library.libro.service.RackService;
 
@@ -26,5 +27,10 @@ public class RackController {
     @PostMapping("/number/{num}")
     public List<Rack> addRacks(@PathVariable int num){
         return rackService.addRacks(num);
+    }
+
+    @GetMapping("/copy/{copyId}")
+    public Copy addCopyToRack(@PathVariable Long copyId){
+        return rackService.addCopyToRack(copyId);
     }
 }

@@ -53,5 +53,4 @@ public class BookController {
                                 @PathVariable UUID authorId){
         return bookService.addAuthor(bookId, authorId);
     }
-
 }

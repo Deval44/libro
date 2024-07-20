@@ -36,7 +36,6 @@ public class Copy {
 
     @ManyToOne
     @JoinColumn(name = "rack_id")
-    @JsonIgnore
     private Rack rack;
 
     public Copy(Book book){

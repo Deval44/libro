@@ -1,5 +1,6 @@
 package system.library.libro.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
@@ -28,6 +29,7 @@ public class Rack {
     private Long id;
 
     @OneToMany(mappedBy = "rack")
+    @JsonIgnore
     private Set<Copy> copies;
 
     @Override
