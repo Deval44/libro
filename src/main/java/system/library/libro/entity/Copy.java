@@ -3,17 +3,12 @@ package system.library.libro.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "copies")
@@ -38,7 +33,15 @@ public class Copy {
     @JoinColumn(name = "rack_id")
     private Rack rack;
 
+    @OneToOne(mappedBy = "copy")
+    private Slip slip;
+
     public Copy(Book book){
         this.book = book;
+    }
+
+    public void removeFromRack() {
+        this.rack.getCopies().remove(this);
+        this.rack = null;
     }
 }
