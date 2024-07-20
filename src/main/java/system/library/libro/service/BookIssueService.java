@@ -5,4 +5,6 @@ import system.library.libro.entity.Slip;
 
 public interface BookIssueService {
     Slip issueBook(BookIssueRequest bookIssueRequest);
+
+    Long returnBook(Long slipId);
 }

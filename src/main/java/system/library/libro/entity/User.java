@@ -35,7 +35,6 @@ public class User {
     private Set<Book> booksAuthored;
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
     private Set<Slip> slips;
 
     @Override

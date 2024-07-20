@@ -33,7 +33,6 @@ public class Copy {
     @JoinColumn(name = "rack_id")
     private Rack rack;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "copy")
     private Slip slip;
 

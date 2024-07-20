@@ -1,12 +1,12 @@
 package system.library.libro.service.impl;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import system.library.libro.dto.request.BookIssueRequest;
 import system.library.libro.entity.Book;
 import system.library.libro.entity.Copy;
-import system.library.libro.entity.Rack;
 import system.library.libro.entity.Slip;
 import system.library.libro.entity.User;
 import system.library.libro.repository.BookRepository;
@@ -17,7 +17,6 @@ import system.library.libro.service.BookIssueService;
 
 import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.Objects;
 
 @Service
 @Slf4j
@@ -61,6 +60,21 @@ public class BookIssueServiceImpl implements BookIssueService {
             return issueBook(bookIssueRequest.getBookId(), slip);
         }
         return null;
+    }
+
+    @Override
+    public Long returnBook(Long slipId) {
+        Slip slip = slipRepository.findById(slipId).orElse(null);
+        if(slip == null){
+            log.error("Invalid slip");
+            return null;
+        }
+        LocalDate now = LocalDate.now();
+        long fee = 20L, fine = 40L;
+        fee = slip.getDueDate().isBefore(now) ? fine : fee;
+
+        slipRepository.deleteById(slip.getSlipId());
+        return fee;
     }
 
     private Slip issueBook(Long bookId, Slip slip) {

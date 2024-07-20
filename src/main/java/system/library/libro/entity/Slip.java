@@ -1,6 +1,7 @@
 package system.library.libro.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
@@ -39,9 +40,11 @@ public class Slip {
     private LocalDate dueDate;
 
     @OneToOne
+    @JsonIgnore
     private Copy copy;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 }
